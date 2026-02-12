@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+  <title>UPSC · Indus Civilisation | 1‑Hour Test Series</title>
+  <!-- Font Awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Font: Inter clean & modern -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <style>
+    /* ---------- GLOBAL RESET & DESIGN TOKENS ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f0f5fa;  /* soft arctic blue */
+      min-height: 100vh;
+      padding: 16px 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      line-height: 1.5;
+    }
+
+    /* main card – clean white, subtle depth */
+    .test-harappa {
+      max-width: 1440px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 36px;
+      box-shadow: 0 20px 40px -12px rgba(0, 20, 40, 0.18);
+      padding: 32px 36px;
+      transition: all 0.2s;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    /* ---------- TYPOGRAPHY & COLOR SCHEME ---------- */
+    :root {
+      --primary-deep: #0a3a4b;     /* UPSC authority blue-teal */
+      --primary-soft: #1e5c6b;
+      --accent-burnt: #c4450c;      /* warm orange – for action */
+      --accent-soft: #fef1e6;
+      --gray-50: #f8fafc;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-600: #475569;
+      --gray-800: #1e293b;
+      --success: #0b6e4f;
+      --danger: #b4342c;
+      --warning: #dc7f2a;
+      --info: #286f8c;
+      --border-light: #e9eef2;
+      --shadow-sm: 0 4px 12px rgba(0,0,0,0.02);
+    }
+
+    h1, h2, h3 {
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    /* ---------- HEADER : TITLE & TIMER ---------- */
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      gap: 16px;
+    }
+
+    h1 {
+      font-size: 1.95rem;
+      font-weight: 700;
+      color: var(--primary-deep);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    h1 i {
+      color: var(--accent-burnt);
+      font-size: 2rem;
+    }
+
+    .timer-box {
+      background: var(--primary-deep);
+      color: white;
+      padding: 0.6rem 1.6rem;
+      border-radius: 60px;
+      font-size: 1.6rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 8px 0 #05262e, 0 10px 20px rgba(0,0,0,0.1);
+      letter-spacing: 0.5px;
+    }
+
+    /* ---------- PROGRESS BAR (time / questions) ---------- */
+    .progress-section {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+    .time-progress {
+      flex: 2;
+      min-width: 200px;
+    }
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--gray-600);
+      margin-bottom: 4px;
+    }
+    .progress-track {
+      background: var(--gray-200);
+      height: 10px;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      background: linear-gradient(90deg, #f39c12, #e67e22);
+      height: 10px;
+      width: 0%;
+      border-radius: 20px;
+      transition: width 0.2s;
+    }
+    .q-stats {
+      background: var(--accent-soft);
+      padding: 0.4rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--primary-deep);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ---------- CONTROL PANEL – modern toggles ---------- */
+    .control-panel {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+      background: white;
+      padding: 0.8rem 1.8rem;
+      border-radius: 60px;
+      margin-bottom: 32px;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+    }
+    .mode-group, .neg-group, .new-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .mode-group label, .neg-group label {
+      font-weight: 600;
+      color: var(--gray-800);
+      font-size: 0.95rem;
+    }
+    select, button, .mode-group input[type="radio"] {
+      cursor: pointer;
+    }
+    .mode-group input[type="radio"] {
+      accent-color: var(--accent-burnt);
+      width: 16px;
+      height: 16px;
+      margin: 0;
+    }
+    button {
+      background: white;
+      border: 1.5px solid var(--gray-200);
+      padding: 0.5rem 1.5rem;
+      border-radius: 40px;
+      font-weight: 600;
+      color: var(--gray-800);
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.95rem;
+    }
+    button i {
+      color: var(--primary-soft);
+    }
+    button:hover {
+      background: var(--primary-deep);
+      color: white;
+      border-color: var(--primary-deep);
+    }
+    button:hover i {
+      color: white;
+    }
+    .neg-group input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent-burnt);
+    }
+
+    /* ---------- MAIN LAYOUT – 2 column (single mode) ---------- */
+    .quiz-grid {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 28px;
+      margin-top: 8px;
+    }
+
+    /* ----- question palette (elegant card) ----- */
+    .palette-card {
+      background: var(--gray-50);
+      border-radius: 24px;
+      padding: 22px 16px;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+      height: fit-content;
+      max-height: 70vh;
+      overflow-y: auto;
+      position: sticky;
+      top: 20px;
+    }
+    .palette-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary-deep);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 2px dashed var(--gray-200);
+      padding-bottom: 12px;
+    }
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+    .q-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      border: 1.5px solid transparent;
+      background: white;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--gray-800);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.1s;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      cursor: pointer;
+    }
+    .q-btn.attempted {
+      background: #e2f0e6;
+      border-color: #0b6e4f;
+      color: #0b6e4f;
+    }
+    .q-btn.marked {
+      background: #fff5e1;
+      border-color: #f39c12;
+      color: #b45f1b;
+      position: relative;
+    }
+    .q-btn.current {
+      background: var(--primary-deep);
+      color: white;
+      border-color: white;
+      box-shadow: 0 0 0 3px rgba(10,58,75,0.15);
+    }
+    .q-btn:hover {
+      transform: scale(0.96);
+      background: var(--gray-200);
+    }
+
+    /* ----- question display card ----- */
+    .question-card {
+      background: white;
+      border-radius: 28px;
+      padding: 28px 32px;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+    }
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 24px;
+    }
+    .q-badge {
+      background: #eef7ff;
+      color: var(--primary-deep);
+      padding: 0.4rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .star-mark {
+      font-size: 1.6rem;
+      color: #c0b29a;
+      cursor: pointer;
+      transition: 0.1s;
+    }
+    .star-mark.active {
+      color: #f5b042;
+      text-shadow: 0 0 8px #ffb347;
+    }
+    .q-text {
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-bottom: 32px;
+      color: #0b2a34;
+      line-height: 1.5;
+    }
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+    .option-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 0.9rem 1.8rem;
+      background: #fafcff;
+      border-radius: 60px;
+      border: 1px solid #e2eaf0;
+      transition: all 0.1s;
+      cursor: pointer;
+    }
+    .option-row:hover {
+      background: #e9f2f9;
+      border-color: var(--primary-soft);
+    }
+    .option-row input[type="radio"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--accent-burnt);
+    }
+
+    /* navigation buttons */
+    .nav-arrows {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 16px;
+    }
+    .nav-btn, .submit-primary {
+      background: white;
+      border: 1.5px solid var(--gray-300);
+      padding: 0.65rem 2rem;
+      border-radius: 100px;
+      font-weight: 600;
+    }
+    .submit-primary {
+      background: var(--accent-burnt);
+      border: none;
+      color: white;
+      padding: 0.85rem 2.8rem;
+      font-size: 1.05rem;
+      margin: 0 auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+    }
+    .submit-primary:hover {
+      background: #a3380a;
+    }
+
+    /* ----- ALL AT ONCE MODE (clean scroll) ----- */
+    .all-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      max-height: 70vh;
+      overflow-y: auto;
+      padding-right: 6px;
+    }
+    .all-q-block {
+      background: white;
+      border-radius: 20px;
+      padding: 1.8rem;
+      border: 1px solid var(--border-light);
+    }
+
+    /* ----- RESULT SHEET – modern analytics ----- */
+    .result-sheet {
+      background: white;
+      border-radius: 32px;
+      padding: 2.5rem;
+      border: 1px solid #eef2f6;
+    }
+    .big-score {
+      font-size: 4rem;
+      font-weight: 800;
+      color: var(--primary-deep);
+      line-height: 1;
+    }
+    .stat-row {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      margin: 30px 0;
+    }
+    .stat-badge {
+      background: #f1f8fe;
+      padding: 0.8rem 2rem;
+      border-radius: 60px;
+      font-weight: 600;
+      color: var(--gray-800);
+    }
+
+    /* correct/wrong highlights */
+    .correct-option-highlight {
+      background: #e0f2e2;
+      border-left: 8px solid #1e7a44;
+    }
+    .wrong-option-highlight {
+      background: #ffe9e5;
+      border-left: 8px solid #bc3f31;
+    }
+    .skipped-highlight {
+      background: #fff6e5;
+      border-left: 8px solid #ca8a4a;
+    }
+
+    /* ---------- 📱 ENHANCED MOBILE VIEW – same premium style ---------- */
+    @media (max-width: 900px) {
+      body { padding: 12px 8px; }
+      .test-harappa { padding: 20px 18px; }
+      .quiz-grid { grid-template-columns: 1fr; gap: 20px; }
+      .palette-card { 
+        position: relative; 
+        top: 0; 
+        max-height: none; 
+        order: 2;  /* palette after question on mobile */
+      }
+      .question-card { order: 1; }
+      .control-panel { 
+        padding: 1rem 1.2rem; 
+        gap: 16px; 
+        border-radius: 30px; 
+        justify-content: space-around;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .test-harappa { padding: 18px 14px; border-radius: 28px; }
+      h1 { font-size: 1.5rem; }
+      h1 i { font-size: 1.6rem; }
+      .timer-box { 
+        font-size: 1.2rem; 
+        padding: 0.4rem 1.2rem; 
+        box-shadow: 0 4px 0 #05262e;
+      }
+      .progress-section { flex-direction: column; align-items: stretch; }
+      .time-progress { min-width: unset; }
+      .q-stats { align-self: flex-end; }
+      
+      /* palette adjustments – 5 columns might be too tight, go to 4 or 5? keep 5 but smaller */
+      .palette-grid { grid-template-columns: repeat(5, 1fr); gap: 6px; }
+      .q-btn { width: 48px; height: 48px; font-size: 0.9rem; } /* slightly bigger tap target */
+      
+      .question-card { padding: 20px 16px; }
+      .q-text { font-size: 1.2rem; }
+      .option-row { padding: 0.7rem 1.2rem; }
+      .option-row label { font-size: 0.95rem; }
+      
+      .nav-btn, .submit-primary { padding: 0.5rem 1.4rem; }
+      .submit-primary { padding: 0.7rem 1.8rem; font-size: 1rem; }
+      
+      .all-q-block { padding: 1.2rem; }
+      .result-sheet { padding: 1.8rem; }
+      .big-score { font-size: 3.2rem; }
+      .stat-badge { padding: 0.6rem 1.2rem; }
+    }
+
+    @media (max-width: 480px) {
+      .test-harappa { padding: 16px 12px; }
+      header { flex-direction: column; align-items: flex-start; }
+      .timer-box { align-self: flex-start; }
+      .control-panel { 
+        flex-direction: column; 
+        align-items: flex-start; 
+        width: 100%; 
+        border-radius: 24px;
+      }
+      .mode-group, .neg-group, .new-group { width: 100%; justify-content: space-between; }
+      .new-group button { width: 100%; justify-content: center; }
+      
+      .palette-grid { grid-template-columns: repeat(5, 1fr); gap: 5px; }
+      .q-btn { width: 100%; aspect-ratio: 1; height: auto; padding: 8px 0; }
+      
+      .q-text { font-size: 1.1rem; }
+      .option-row { 
+        padding: 0.6rem 1rem; 
+        gap: 12px; 
+      }
+      .option-row input[type="radio"] { width: 18px; height: 18px; }
+      
+      .star-mark { font-size: 1.4rem; }
+      
+      .all-q-block strong { font-size: 1rem; }
+    }
+
+    @media (max-width: 360px) {
+      .palette-grid { grid-template-columns: repeat(4, 1fr); } /* 4x25 for very small */
+    }
+
+    .footer-note {
+      margin-top: 40px;
+      color: var(--gray-600);
+      text-align: center;
+      border-top: 1px solid var(--border-light);
+      padding-top: 24px;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div id="appRoot" class="test-harappa"></div>
+
+  <script>
+    (function() {
+      "use strict";
+
+      // █████████████████████████████████████████████████████████████
+      // ██  100 UNIQUE INDUS CIVILISATION MCQs (UPSC LEVEL)        ██
+      // █████████████████████████████████████████████████████████████
+      const FULL_QUESTIONS = [
+        { id:1, text:"What metals were known to the people of Indus Civilisation?", options:["Copper, bronze, silver, gold, but not iron","Copper, silver, iron, but not bronze","Copper, gold, iron, but not silver","Copper, silver, iron, but not gold"], correct:0, explanation:"Iron was unknown; they used copper, bronze, silver, gold." },
+        { id:2, text:"Indus Civilisation belonged to which age?", options:["Old Stone age","Medieval stone age","New stone age","Metal age (Bronze)"], correct:3, explanation:"Indus is a Bronze Age civilisation." },
+        { id:3, text:"River valleys are said to be the cradle of civilisation because:", options:["Soil is fertile","Good climate","Useful for transportation","Many civilisations flourished on river valleys"], correct:3, explanation:"All are benefits; the statement best captures historical significance." },
+        { id:4, text:"Which about Mohenjo-Daro is correct?", options:["Gold ornaments unknown","Houses made of burnt bricks","Implements made of iron","Great Bath watertight with natural bitumen"], correct:3, explanation:"Bitumen made the Great Bath watertight; burnt bricks existed but this is distinctive." },
+        { id:5, text:"Main occupation of Indus people?", options:["Agriculture and trade","Only hunting","Iron smelting","Ship building"], correct:0, explanation:"Agriculture, handicrafts and trade were primary." },
+        { id:6, text:"Which was the centre of foreign trade in India during IVC?", options:["Pakistan","Gujarat","Rajasthan","Uttar Pradesh"], correct:1, explanation:"Lothal in Gujarat was a major trading centre." },
+        { id:7, text:"Rivers around which Indus civilisation flourished?", options:["Indus & Ghaggar","Indus & Godavari","Indus & Tapi","Indus & Brahmaputra"], correct:0, explanation:"Core area along Indus and Ghaggar-Hakra." },
+        { id:8, text:"Which archaeological site of Indus-Saraswati civilisation is in Pakistan?", options:["Harappa","Rangpur","Kalibangan","Dholavira"], correct:0, explanation:"Harappa is in Punjab, Pakistan." },
+        { id:9, text:"Lothal, the dockyard site, is situated in:", options:["Gujarat","Punjab","Pakistan","Haryana"], correct:0, explanation:"Lothal, Gujarat – famous dockyard." },
+        { id:10, text:"Which ancient city was famous for its dockyard?", options:["Dholavira","Lothal","Chanhudaro","Mohenjo-daro"], correct:1, explanation:"Lothal’s dockyard is unique." },
+        { id:11, text:"A building found at _______ was probably a workshop for making beads:", options:["Lothal","Chanhudaro","Kalibangan","Dholavira"], correct:1, explanation:"Chanhudaro – bead-makers' workshop." },
+        { id:12, text:"Which is NOT a city of Mohenjo-daro?", options:["Mehrgarh","Lothal","Chanhudaro","Ropar"], correct:0, explanation:"Mehrgarh is Neolithic, not a city of Mohenjo-daro." },
+        { id:13, text:"Harappa is located on which river?", options:["Indus","Ravi","Chenab","Sutlej"], correct:1, explanation:"Harappa on the Ravi." },
+        { id:14, text:"Kalibangan is located on which river?", options:["Ghaggar","Indus","Ravi","Beas"], correct:0, explanation:"Kalibangan on Ghaggar." },
+        { id:15, text:"Ropar (Roper) is located on which river?", options:["Sutlej","Beas","Ravi","Indus"], correct:0, explanation:"Ropar on Sutlej." },
+        { id:16, text:"Banawali is located on which river?", options:["Sutlej","Ghaggar","Indus","Ravi"], correct:1, explanation:"Banawali on Ghaggar." },
+        { id:17, text:"Rangpur is located on which river?", options:["Bhadar","Sabarmati","Indus","Ravi"], correct:0, explanation:"Rangpur on Bhadar, Gujarat." },
+        { id:18, text:"Suktagendor is found on which river?", options:["Indus","Dasht","Ravi","Chenab"], correct:1, explanation:"Suktagendor on Dasht river, Pakistan." },
+        { id:19, text:"Two major cities of Indus Valley?", options:["Athens & Sparta","Harappa & Mohenjo-Daro","Babylon & Ur","Thebes & Luxor"], correct:1, explanation:"Harappa and Mohenjo-Daro are the most famous." },
+        { id:20, text:"What river was central to IVC?", options:["Nile","Tigris","Indus","Ganges"], correct:2, explanation:"Indus River." },
+        { id:21, text:"How were houses of IVC?", options:["Huts","Baked bricks, two or more storey","Tree houses","Forest dwellers"], correct:1, explanation:"Baked bricks, multi-storeyed houses." },
+        { id:22, text:"A very special tank, archaeologists call it:", options:["Tank Bath","Great Bath","Special Tank","Great Tank"], correct:1, explanation:"Great Bath of Mohenjo-Daro." },
+        { id:23, text:"Houses were built using:", options:["Bamboos","Wood","Bricks","Stone"], correct:2, explanation:"Standardised burnt bricks." },
+        { id:24, text:"Which is FALSE about brick arrangement in Harappan cities?", options:["Brick around citadel and lower town","Burnt bricks used","Interlocking pattern made walls strong","Bricks lasted few months only"], correct:3, explanation:"Bricks lasted millennia." },
+        { id:25, text:"Significant feature of Indus cities?", options:["Pyramids","Ziggurats","Grid layout & advanced drainage","Colosseums"], correct:2, explanation:"Grid streets and covered drains." },
+        { id:26, text:"Consider: 1) entire Mohenjo-daro fortified 2) standardised bricks 3) lower town streets right angles. Correct?", options:["1&3 only","2&3 only","3 only","1,2,3"], correct:1, explanation:"Entire settlement was NOT fortified; 2 & 3 correct." },
+        { id:27, text:"IVC is known for: 1)town planning 2)agriculture 3)industrialisation 4)iron use", options:["1,2,3","1,2,4","1,3,4","2,3,4"], correct:0, explanation:"Iron unknown – so 1,2,3." },
+        { id:28, text:"Decorative bricks in flooring found only at?", options:["Mohenjo-daro","Harappa","Kalibangan","Dholavira"], correct:3, explanation:"Dholavira has decorative brick flooring." },
+        { id:29, text:"Only Harappan city without a citadel?", options:["Lothal","Chanhudaro","Ropar","Kalibangan"], correct:1, explanation:"Chanhudaro has no citadel." },
+        { id:30, text:"Giant water reservoir found at?", options:["Mohenjo-daro","Harappa","Dholavira","Lothal"], correct:2, explanation:"Dholavira’s unique water management." },
+        { id:31, text:"Stone weights were shaped from:", options:["Chart","Chert","Chant","Charm"], correct:1, explanation:"Chert weights." },
+        { id:32, text:"Significance of Chert in IVC?", options:["Exchange regulated by chert weights","Seals made of chert","Inscriptions on chert","Chert from ground sand"], correct:0, explanation:"Chert weights for trade." },
+        { id:33, text:"Gum used to shape sand into objects, glazed – known as?", options:["Bricks","Stones","Faience","Shell"], correct:2, explanation:"Faience: artificial material." },
+        { id:34, text:"Faience means:", options:["Fine silver-glazed pottery","Fine gold-glazed pottery","Fine tin-glazed earthenware","Fine iron-glazed"], correct:2, explanation:"Tin-glazed delicate earthenware." },
+        { id:35, text:"Ivory scale found at?", options:["Mohenjo-daro","Harappa","Lothal","Kalibangan"], correct:2, explanation:"Lothal ivory scale (smallest division)." },
+        { id:36, text:"Copper elephant was found at?", options:["Harappa","Mohenjo-daro","Dholavira","Lothal"], correct:1, explanation:"Copper elephant from Mohenjo-Daro." },
+        { id:37, text:"Correct pair – raw material procurement?", options:["Copper – South India","Gold – Khetri","Shells – Balakot","Lapis lazuli – Gujarat"], correct:2, explanation:"Shells from Balakot." },
+        { id:38, text:"Impression of cloth on a trough found at?", options:["Harappa","Mohenjo-daro","Lothal","Kalibangan"], correct:3, explanation:"Kalibangan cloth impression." },
+        { id:39, text:"New cities emerged about ____ years later after IVC decline?", options:["1800","1400","1600","2000"], correct:1, explanation:"About 1400 years later." },
+        { id:40, text:"IVC flourished in period:", options:["2600–1900 BCE","1000–750 BCE","3500–2500 BCE","1600–1000 BCE"], correct:0, explanation:"Mature Harappan: 2600–1900 BCE." },
+        { id:41, text:"IVC was a ____ age civilisation:", options:["Silver","Tin","Gold","Bronze"], correct:3, explanation:"Bronze Age." },
+        { id:42, text:"What symbolize the end of civilisation?", options:["Writing, seals, weights no longer used","People stopped living in cities","Raw materials from distance rare","All of the above"], correct:3, explanation:"All indicate decline." },
+        { id:43, text:"One theory about IVC decline?", options:["Invasion by Huns","Massive volcanic eruption","Climate change & river shifts","Conquest by Alexander"], correct:2, explanation:"Climate change and river shifts." },
+        { id:44, text:"People of IVC worshipped?", options:["Brahma","Vishnu","Pashupati","Indra & Varun"], correct:2, explanation:"Pashupati seal." },
+        { id:45, text:"Art of writing of Harappans?", options:["Not developed","Pictographic and characters","Only characters","Only pictographic"], correct:1, explanation:"Pictographic, undeciphered." },
+        { id:46, text:"Script type of IVC?", options:["Cuneiform","Hieroglyphics","Linear B","Undeciphered script"], correct:3, explanation:"Still undeciphered." },
+        { id:47, text:"Animal NOT present on seals/terracotta?", options:["Unicorn","Tiger","Horse","Bull"], correct:2, explanation:"Horse is rare/absent." },
+        { id:48, text:"Painting on jar – cunning fox (Panchatantra) found at?", options:["Harappa","Mohenjo-daro","Lothal","Kalibangan"], correct:3, explanation:"Kalibangan jar painting." },
+        { id:49, text:"Mehrgarh period?", options:["7000 BCE","5000 BCE","3300 BCE","2600 BCE"], correct:0, explanation:"Neolithic Mehergarh from 7000 BCE." },
+        { id:50, text:"Director General of ASI who linked Harappa & Mohenjo-Daro?", options:["Alexander Cunningham","John Marshall","Charles Masson","Mortimer Wheeler"], correct:1, explanation:"Sir John Marshall, 1924." },
+        { id:51, text:"Harappan city with three divisions?", options:["Dholavira","Mohenjo-Daro","Harappa","Lothal"], correct:0, explanation:"Dholavira had citadel, middle, lower." },
+        { id:52, text:"Metal not used by Harappans?", options:["Copper","Gold","Silver","Iron"], correct:3, explanation:"Iron unknown." },
+        { id:53, text:"Most common animal on seals?", options:["Elephant","Tiger","Unicorn","Buffalo"], correct:2, explanation:"Unicorn most frequent." },
+        { id:54, text:"Great Granary discovered at?", options:["Mohenjo-daro","Harappa","Rakhigarhi","Lothal"], correct:1, explanation:"Harappa granaries." },
+        { id:55, text:"Assembly Hall (pillared) found at?", options:["Harappa","Mohenjo-Daro","Dholavira","Kalibangan"], correct:1, explanation:"Mohenjo-Daro assembly hall." },
+        { id:56, text:"Which site has a stadium?", options:["Dholavira","Lothal","Chanhudaro","Banawali"], correct:0, explanation:"Dholavira’s unique structure." },
+        { id:57, text:"Spoked wheels evidence?", options:["Present","Absent","Rare after 2000 BCE","Only in toys"], correct:1, explanation:"Spokeless solid wheels." },
+        { id:58, text:"Indus seal found as far as?", options:["Egypt","Mesopotamia","China","Persia"], correct:1, explanation:"Mesopotamia (Sumer)." },
+        { id:59, text:"King Naram-Sin bought jewellery from 'Melukha' – identified as?", options:["Egypt","Indus region","Persian Gulf","Oman"], correct:1, explanation:"Melukha = Indus Valley." },
+        { id:60, text:"Lothal was situated on banks of?", options:["Sabarmati tributary","Narmada","Tapi","Bhadar"], correct:0, explanation:"Tributary of Sabarmati." },
+        { id:61, text:"Bronze statue 'Dancing Girl' found at?", options:["Harappa","Mohenjo-Daro","Lothal","Dholavira"], correct:1, explanation:"Mohenjo-Daro." },
+        { id:62, text:"Bearded priest sculpture from?", options:["Harappa","Mohenjo-Daro","Rakhigarhi","Kalibangan"], correct:1, explanation:"Mohenjo-Daro priest." },
+        { id:63, text:"Material used for waterproofing Great Bath?", options:["Plaster","Clay","Bitumen","Tar"], correct:2, explanation:"Natural bitumen." },
+        { id:64, text:"Citadel part of city used by?", options:["Common people","Administrators","Traders","Farmers"], correct:1, explanation:"Citadel for elites." },
+        { id:65, text:"Indus people wore?", options:["Cotton & wool","Only cotton","Silk","Jute"], correct:0, explanation:"Cotton fabrics and wool." },
+        { id:66, text:"Evidence of spindles indicates?", options:["Weaving","Pottery","Metalwork","Bead making"], correct:0, explanation:"Yarn spinning." },
+        { id:67, text:"Which stone did Indus use for jewellery?", options:["Diamond","Carnelian","Emerald","Ruby"], correct:1, explanation:"Red quartz – carnelian." },
+        { id:68, text:"Terracotta toys include?", options:["Carts with movable head","Dolls","Monkeys","All of above"], correct:3, explanation:"Variety of movable toys." },
+        { id:69, text:"Standardised weights found in?", options:["Chert","Limestone","Steatite","Jasper"], correct:0, explanation:"Chert cubes." },
+        { id:70, text:"Radiocarbon method uses?", options:["Carbon-14","Uranium","Potassium","Argon"], correct:0, explanation:"C14 dating." },
+        { id:71, text:"Mohenjo-Daro declared World Heritage by?", options:["ASI","UNESCO","IUCN","INTACH"], correct:1, explanation:"UNESCO site." },
+        { id:72, text:"Copper was first metal used by?", options:["Egyptians","Indus people","Mesopotamians","Chinese"], correct:1, explanation:"Indus people used copper." },
+        { id:73, text:"Evidence of domesticated animals?", options:["Horse","Pig","Sheep","Buffalo"], correct:2, explanation:"Sheep, goat, buffalo; horse not confirmed." },
+        { id:74, text:"Which crop NOT found in Indus?", options:["Wheat","Barley","Rice","Sesame"], correct:2, explanation:"Rice rare, not a major crop." },
+        { id:75, text:"Indus pottery was generally?", options:["Red with black designs","Black on red","Polished grey","Painted grey"], correct:0, explanation:"Red ware with black paint." },
+        { id:76, text:"Mother Goddess figurines indicate?", options:["Fertility worship","Warrior cult","Trade deity","Sun worship"], correct:0, explanation:"Fertility cult." },
+        { id:77, text:"Which site shows evidence of plough?", options:["Kalibangan","Banawali","Lothal","Rangpur"], correct:0, explanation:"Ploughed field at Kalibangan." },
+        { id:78, text:"Size of Indus civilisation (area)?", options:["5 lakh sq.km","13 lakh sq.km","20 lakh sq.km","8 lakh sq.km"], correct:1, explanation:"13 lakh sq.km – largest ancient civilisation." },
+        { id:79, text:"Number of big cities?", options:["2","6","10","15"], correct:1, explanation:"6 major cities." },
+        { id:80, text:"Indus script has how many signs?", options:["About 100","200–250","400–450","600"], correct:2, explanation:"Approx 400 signs." },
+        { id:81, text:"Direction of Indus script writing?", options:["Left to right","Right to left","Boustrophedon","Top to bottom"], correct:1, explanation:"Right to left (seals)." },
+        { id:82, text:"Use of steatite?", options:["Seals","Weights","Beads","All"], correct:3, explanation:"Steatite for seals, beads, inlay." },
+        { id:83, text:"Which site has 'lock and key' system?", options:["Dholavira","Lothal","Mohenjo-Daro","Kalibangan"], correct:1, explanation:"Lothal – locks." },
+        { id:84, text:"Indus people domesticated elephants?", options:["Yes, seals show","No evidence","Only bones","Only ivory work"], correct:3, explanation:"Ivory shows presence; but domestication unclear." },
+        { id:85, text:"KVT complex relates to?", options:["Sangam names in Pakistan","Afghanistan trade","Indus-Saraswati","Mesopotamia"], correct:0, explanation:"Korkai-Vanji-Thondi place names in Pakistan." },
+        { id:86, text:"Carnelian is what colour?", options:["Red","Blue","Green","Yellow"], correct:0, explanation:"Red quartz." },
+        { id:87, text:"Burnt bricks used because?", options:["Strong, durable, waterproof","Cheap","Easily available","No reason"], correct:0, explanation:"Fire resistant, durable." },
+        { id:88, text:"Assembly Hall at Mohenjo-Daro had how many pillars?", options:["10","20","30","40"], correct:1, explanation:"20 pillars." },
+        { id:89, text:"Lothal's dockyard indicates?", options:["Maritime trade","River port","War ships","Fishing"], correct:0, explanation:"Overseas trade." },
+        { id:90, text:"Which animal is NOT on seals?", options:["Gharial","Rhino","Horse","Bison"], correct:2, explanation:"Horse absent." },
+        { id:91, text:"Indus civilisation time span (radiocarbon)", options:["3500–2000 BCE","3300–1900 BCE","3100–1100 BCE","2600–1200 BCE"], correct:1, explanation:"3300–1900 BCE." },
+        { id:92, text:"Great Bath dimensions?", options:["11.88×7.01×2.43m","15×8×3m","10×6×2m","12×6×2.5m"], correct:0, explanation:"Approx 12×7×2.4m." },
+        { id:93, text:"Most of Indus bricks ratio?", options:["1:2:4","4:2:1","2:1:4","3:2:1"], correct:0, explanation:"1:2:4 standard." },
+        { id:94, text:"Cylindrical seals found in Indus area link to?", options:["Egypt","Persian Gulf","China","Africa"], correct:1, explanation:"Persian Gulf/Mesopotamia." },
+        { id:95, text:"Rakhigarhi is in which state?", options:["Punjab","Haryana","Rajasthan","Gujarat"], correct:1, explanation:"Haryana." },
+        { id:96, text:"Evidence of ship at?", options:["Lothal","Mohenjo-Daro","Harappa","Dholavira"], correct:0, explanation:"Lothal dockyard." },
+        { id:97, text:"Indus civilisation is also called?", options:["Harappan","Aryan","Vedic","Gandhara"], correct:0, explanation:"Harappan culture." },
+        { id:98, text:"Who first described Harappa ruins?", options:["John Marshall","Charles Masson","Dayaram Sahni","Rakhaldas Banerji"], correct:1, explanation:"Charles Masson, 1826." },
+        { id:99, text:"The word 'civilisation' from Latin 'civis' means?", options:["City","Citizen","Society","Culture"], correct:0, explanation:"Civis = city." },
+        { id:100, text:"Which site has 5 large reservoirs?", options:["Dholavira","Mohenjo-Daro","Harappa","Ganweriwala"], correct:0, explanation:"Dholavira's reservoirs." }
+      ];
+
+      // ---------- GLOBAL STATE ----------
+      let state = {
+        questions: [],
+        userAnswers: [],
+        markedForReview: [],
+        testSubmitted: false,
+        timeLeft: 3600,           // ⏳ 1 hour = 3600 seconds
+        viewMode: 'single',
+        negativeMarking: false,
+        currentIndex: 0,
+        timerId: null
+      };
+
+      // ---------- HELPER: shuffle ----------
+      function shuffleArray(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      function shuffleOptions(question) {
+        const opts = [...question.options];
+        const correctAns = opts[question.correct];
+        for (let i = opts.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [opts[i], opts[j]] = [opts[j], opts[i]];
+        }
+        return { shuffled: opts, newCorrect: opts.indexOf(correctAns) };
+      }
+
+      function initTest() {
+        let fresh = shuffleArray([...FULL_QUESTIONS]).map(q => ({ ...q, options: [...q.options], correct: q.correct }));
+        fresh = fresh.map(q => {
+          const { shuffled, newCorrect } = shuffleOptions(q);
+          return { ...q, options: shuffled, correct: newCorrect };
+        });
+
+        if (state.timerId) clearInterval(state.timerId);
+        state.questions = fresh;
+        state.userAnswers = new Array(fresh.length).fill(null);
+        state.markedForReview = new Array(fresh.length).fill(false);
+        state.testSubmitted = false;
+        state.timeLeft = 3600;    // 1 hour fresh
+        state.currentIndex = 0;
+        state.viewMode = document.querySelector('input[name="viewMode"]:checked')?.value || 'single';
+        state.negativeMarking = document.getElementById('negMarkCheck')?.checked || false;
+        startTimer();
+        render();
+      }
+
+      function startTimer() {
+        if (state.timerId) clearInterval(state.timerId);
+        state.timerId = setInterval(() => {
+          if (state.testSubmitted) { clearInterval(state.timerId); return; }
+          state.timeLeft -= 1;
+          if (state.timeLeft <= 0) {
+            state.timeLeft = 0;
+            clearInterval(state.timerId);
+            submitTest();
+          }
+          updateTimerUI();
+          renderProgress();  // dynamic progress bar
+        }, 1000);
+      }
+
+      function updateTimerUI() {
+        const el = document.getElementById('timerDisplay');
+        if (!el) return;
+        const mins = Math.floor(state.timeLeft / 60);
+        const secs = state.timeLeft % 60;
+        el.innerHTML = `<i class="fas fa-hourglass-half"></i> ${mins.toString().padStart(2,'0')}:${secs.toString().padStart(2,'0')}`;
+      }
+
+      function renderProgress() {
+        const fill = document.querySelector('.progress-fill');
+        if (fill) {
+          const percent = ((3600 - state.timeLeft) / 3600) * 100;
+          fill.style.width = `${Math.min(100, percent)}%`;
+        }
+        const qStats = document.querySelector('.q-stats span');
+        if (qStats) {
+          const answered = state.userAnswers.filter(a => a !== null).length;
+          qStats.innerText = `${answered}/${state.questions.length} answered`;
+        }
+      }
+
+      function evaluate() {
+        let correct = 0, wrong = 0, skipped = 0, total = 0;
+        const perQ = 4, negVal = state.negativeMarking ? 1 : 0;
+        state.questions.forEach((q,i) => {
+          const ans = state.userAnswers[i];
+          if (ans === null) skipped++;
+          else if (ans === q.correct) { correct++; total += perQ; }
+          else { wrong++; total -= negVal; }
+        });
+        const max = state.questions.length * perQ;
+        const perc = max > 0 ? ((total / max) * 100).toFixed(2) : 0;
+        return { correct, wrong, skipped, total, perc, max };
+      }
+
+      function submitTest() {
+        if (state.testSubmitted) return;
+        state.testSubmitted = true;
+        if (state.timerId) clearInterval(state.timerId);
+        render();
+      }
+
+      // global functions
+      window.setAnswer = function(qIdx, optIdx) {
+        if (!state.testSubmitted) {
+          state.userAnswers[qIdx] = optIdx;
+          render();
+        }
+      };
+      window.toggleMark = function(qIdx) {
+        if (!state.testSubmitted) {
+          state.markedForReview[qIdx] = !state.markedForReview[qIdx];
+          render();
+        }
+      };
+      window.goToQuestion = function(idx) {
+        if (!state.testSubmitted && idx >= 0 && idx < state.questions.length) {
+          state.currentIndex = idx;
+          render();
+        }
+      };
+      window.changeView = function(mode) {
+        if (mode === 'single' || mode === 'all') { state.viewMode = mode; render(); }
+      };
+      window.toggleNegative = function() {
+        const chk = document.getElementById('negMarkCheck');
+        state.negativeMarking = chk.checked;
+      };
+      window.newTest = function() { initTest(); };
+      window.submitTest = submitTest;
+
+      // ---------- RENDER (ADVANCED LAYOUT) ----------
+      function render() {
+        const root = document.getElementById('appRoot');
+        if (!root) return;
+
+        const mins = Math.floor(state.timeLeft / 60);
+        const secs = state.timeLeft % 60;
+        const answeredCount = state.userAnswers.filter(a => a !== null).length;
+        const progressPercent = ((3600 - state.timeLeft) / 3600) * 100;
+
+        let html = `
+          <header>
+            <h1><i class="fas fa-chess-board"></i> UPSC · Indus 100</h1>
+            <div class="timer-box" id="timerDisplay">
+              <i class="fas fa-hourglass-half"></i> ${mins.toString().padStart(2,'0')}:${secs.toString().padStart(2,'0')}
+            </div>
+          </header>
+
+          <!-- progress & stats -->
+          <div class="progress-section">
+            <div class="time-progress">
+              <div class="progress-label">
+                <span><i class="fas fa-clock"></i> Time remaining</span>
+                <span>${Math.floor(state.timeLeft/60)}:${(state.timeLeft%60).toString().padStart(2,'0')} / 60:00</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" style="width: ${Math.min(100, progressPercent)}%;"></div>
+              </div>
+            </div>
+            <div class="q-stats">
+              <i class="fas fa-check-circle" style="color:#0b6e4f;"></i> <span>${answeredCount}/${state.questions.length} answered</span>
+            </div>
+          </div>
+
+          <!-- control panel -->
+          <div class="control-panel">
+            <div class="mode-group">
+              <label><i class="fas fa-layers"></i> Mode:</label>
+              <input type="radio" name="viewMode" value="single" id="radSingle" ${state.viewMode==='single'?'checked':''} onchange="changeView('single')">
+              <label for="radSingle">One/page</label>
+              <input type="radio" name="viewMode" value="all" id="radAll" ${state.viewMode==='all'?'checked':''} onchange="changeView('all')">
+              <label for="radAll">All at once</label>
+            </div>
+            <div class="neg-group">
+              <input type="checkbox" id="negMarkCheck" ${state.negativeMarking?'checked':''} onchange="toggleNegative()">
+              <label><i class="fas fa-minus-circle"></i> Negative (wrong: -1)</label>
+            </div>
+            <div class="new-group">
+              <button onclick="newTest()"><i class="fas fa-rotate"></i> New test</button>
+            </div>
+          </div>
+        `;
+
+        if (state.testSubmitted) {
+          // ---------------- RESULT PAGE ----------------
+          const e = evaluate();
+          html += `<div class="result-sheet">`;
+          html += `<h2 style="display:flex; gap:8px; color:var(--primary-deep);"><i class="fas fa-flag-checkered"></i> Test completed</h2>`;
+          html += `<div class="big-score">${Math.max(0,e.total)} / ${e.max}</div>`;
+          html += `<div class="stat-row">
+            <span class="stat-badge"><i class="fas fa-check" style="color:#2e7d32;"></i> Correct: ${e.correct}</span>
+            <span class="stat-badge"><i class="fas fa-times" style="color:#b34141;"></i> Wrong: ${e.wrong}</span>
+            <span class="stat-badge"><i class="fas fa-ban" style="color:#7d6b4a;"></i> Skipped: ${e.skipped}</span>
+            <span class="stat-badge"><i class="fas fa-percent"></i> ${e.perc}%</span>
+          </div>`;
+          html += `<h3 style="margin:40px 0 20px;">📘 Detailed review</h3>`;
+          state.questions.forEach((q, idx) => {
+            const user = state.userAnswers[idx];
+            const isCorrect = (user === q.correct);
+            let cls = '';
+            if (user === null) cls = 'skipped-highlight';
+            else cls = isCorrect ? 'correct-option-highlight' : 'wrong-option-highlight';
+            html += `<div class="all-q-block ${cls}" style="margin-bottom:16px; padding:1.4rem;">`;
+            html += `<div style="display:flex; justify-content:space-between;"><strong>Q${idx+1}. ${q.text}</strong> ${state.markedForReview[idx]?'<span style="color:#f5b342;"><i class="fas fa-star"></i> marked</span>':''}</div>`;
+            q.options.forEach((opt, oi) => {
+              let mark = '', bg = '';
+              if (oi === q.correct) bg = 'background:#deefe8;';
+              if (user === oi) {
+                if (oi === q.correct) mark = ' ✓ (your answer)';
+                else mark = ' ✗ (your answer)';
+              } else if (oi === q.correct) mark = ' ✓ correct';
+              html += `<div style="margin-left:20px; ${bg}">${String.fromCharCode(65+oi)}. ${opt} <em>${mark}</em></div>`;
+            });
+            html += `<div class="explain" style="margin-top:12px;"><i class="fas fa-info-circle"></i> ${q.explanation}</div>`;
+            html += `</div>`;
+          });
+          html += `<button onclick="newTest()" style="background:var(--primary-deep); color:white; border:none;"><i class="fas fa-redo-alt"></i> New attempt</button>`;
+          html += `</div>`;
+        } else {
+          // ---------------- ACTIVE TEST ----------------
+          if (state.viewMode === 'single') {
+            // TWO COLUMN LAYOUT with palette
+            html += `<div class="quiz-grid">`;
+            // ----- palette column -----
+            html += `<div class="palette-card">
+                        <div class="palette-title"><i class="fas fa-grid-2"></i> Question palette</div>
+                        <div class="palette-grid">`;
+            for (let i = 0; i < state.questions.length; i++) {
+              let btnClass = 'q-btn';
+              if (state.userAnswers[i] !== null) btnClass += ' attempted';
+              if (state.markedForReview[i]) btnClass += ' marked';
+              if (state.currentIndex === i) btnClass += ' current';
+              html += `<button class="${btnClass}" onclick="goToQuestion(${i})">${i+1}</button>`;
+            }
+            html += `    </div>
+                      </div>`;
+
+            // ----- question column -----
+            const qi = state.currentIndex;
+            const q = state.questions[qi];
+            html += `<div class="question-card">`;
+            html += `<div class="q-header">
+                        <span class="q-badge"><i class="fas fa-question"></i> Q${qi+1}/${state.questions.length}</span>
+                        <span class="star-mark ${state.markedForReview[qi]?'active':''}" onclick="toggleMark(${qi})">
+                          <i class="fa-star ${state.markedForReview[qi]?'fas':'far'}"></i> review
+                        </span>
+                      </div>`;
+            html += `<div class="q-text">${q.text}</div>`;
+            html += `<div class="options-list">`;
+            q.options.forEach((opt, oi) => {
+              const checked = (state.userAnswers[qi] === oi) ? 'checked' : '';
+              html += `<div class="option-row" onclick="setAnswer(${qi}, ${oi})">
+                          <input type="radio" name="singleQ" value="${oi}" ${checked} id="opt_${qi}_${oi}">
+                          <label for="opt_${qi}_${oi}" style="cursor:pointer; width:100%;">${String.fromCharCode(65+oi)}. ${opt}</label>
+                        </div>`;
+            });
+            html += `</div><div class="nav-arrows">`;
+            if (qi > 0) html += `<button class="nav-btn" onclick="goToQuestion(${qi-1})"><i class="fas fa-chevron-left"></i> Prev</button>`;
+            else html += `<button disabled class="nav-btn">Prev</button>`;
+            if (qi < state.questions.length-1) html += `<button class="nav-btn" onclick="goToQuestion(${qi+1})">Next <i class="fas fa-chevron-right"></i></button>`;
+            else html += `<button disabled class="nav-btn">Next</button>`;
+            html += `</div><div style="text-align:center; margin-top:32px;">
+                      <button class="submit-primary" onclick="submitTest()"><i class="fas fa-check-circle"></i> SUBMIT TEST</button>
+                    </div>`;
+            html += `</div>`; // close question-card
+            html += `</div>`; // close quiz-grid
+          } else {
+            // -------------- ALL AT ONCE MODE --------------
+            html += `<div class="quiz-stage all-grid" style="max-height:70vh; overflow-y:auto; padding-right:10px;">`;
+            state.questions.forEach((q, idx) => {
+              html += `<div class="all-q-block" style="background:white;">`;
+              html += `<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                          <strong style="font-size:1.1rem;">Q${idx+1}. ${q.text}</strong>
+                          <span class="star-mark ${state.markedForReview[idx]?'active':''}" onclick="toggleMark(${idx})" style="font-size:1.6rem;">
+                            <i class="fa-star ${state.markedForReview[idx]?'fas':'far'}"></i>
+                          </span>
+                        </div>`;
+              q.options.forEach((opt, oi) => {
+                const checked = (state.userAnswers[idx] === oi) ? 'checked' : '';
+                html += `<div style="margin-left:16px; margin-bottom:8px; display:flex; align-items:center;" onclick="setAnswer(${idx}, ${oi})">
+                          <input type="radio" name="q_${idx}" value="${oi}" ${checked} style="margin-right:12px;"> 
+                          <label>${String.fromCharCode(65+oi)}. ${opt}</label>
+                        </div>`;
+              });
+              html += `</div>`;
+            });
+            html += `<div style="text-align:center; margin:30px 0 20px;">
+                      <button class="submit-primary" onclick="submitTest()">📬 SUBMIT FINAL TEST</button>
+                    </div>`;
+            html += `</div>`;
+          }
+        }
+
+        html += `<div class="footer-note"><i class="fas fa-archaeology"></i> Harappa · 100 MCQs · 1-hour UPSC advanced test series</div>`;
+        root.innerHTML = html;
+        updateTimerUI();
+      }
+
+      // start
+      initTest();
+    })();
+  </script>
+</body>
+</html>
